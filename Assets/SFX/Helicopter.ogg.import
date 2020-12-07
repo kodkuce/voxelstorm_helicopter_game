@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Helicopter.ogg-4af26c11a029f9abe01a399dffbd6e0b.oggstr"
+
+[deps]
+
+source_file="res://Assets/SFX/Helicopter.ogg"
+dest_files=[ "res://.import/Helicopter.ogg-4af26c11a029f9abe01a399dffbd6e0b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

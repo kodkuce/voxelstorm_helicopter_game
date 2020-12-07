@@ -1,0 +1,176 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Source/UI/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Assets/HPbar/HP_background.png" type="Texture" id=2]
+[ext_resource path="res://Assets/HPbar/HP_value.png" type="Texture" id=3]
+[ext_resource path="res://Assets/HPbar/HP_ower.png" type="Texture" id=4]
+[ext_resource path="res://Source/UI/Ingame.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Fonts/Goldern-Serif-Outline-L.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Assets/Fonts/Goldern-Serif-Outline.tres" type="DynamicFont" id=7]
+[ext_resource path="res://Source/UI/Endgame.gd" type="Script" id=8]
+
+[node name="User_interface" type="Control"]
+margin_right = 1280.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartGame" type="TextureButton" parent="MainMenu"]
+margin_left = 149.0
+margin_top = 237.0
+margin_right = 452.0
+margin_bottom = 317.0
+
+[node name="Label" type="Label" parent="MainMenu/StartGame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 49.0
+margin_bottom = -15.0
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "START GAME"
+valign = 1
+
+[node name="Label" type="Label" parent="MainMenu"]
+margin_left = 151.941
+margin_top = 429.773
+margin_right = 501.941
+margin_bottom = 544.773
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "CONTROLS:
+
+WASD/ARROWS - MOVE
+SHIFT HOLD - STRAFE
+J - ROCKETS
+K - TURRET
+"
+
+[node name="Label2" type="Label" parent="MainMenu"]
+margin_left = 150.941
+margin_top = 339.595
+margin_right = 495.941
+margin_bottom = 370.595
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "CUSTOMIZE:
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu"]
+margin_left = 149.941
+margin_top = 365.665
+margin_right = 452.941
+margin_bottom = 405.665
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="camo1" type="ColorPickerButton" parent="MainMenu/HBoxContainer"]
+margin_right = 98.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="camo2" type="ColorPickerButton" parent="MainMenu/HBoxContainer"]
+margin_left = 102.0
+margin_right = 200.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="camo3" type="ColorPickerButton" parent="MainMenu/HBoxContainer"]
+margin_left = 204.0
+margin_right = 303.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Ingame" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerHP" type="TextureProgress" parent="Ingame"]
+margin_left = 42.0
+margin_top = 34.0
+margin_right = 367.0
+margin_bottom = 59.0
+value = 100.0
+allow_lesser = true
+texture_under = ExtResource( 2 )
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 3 )
+
+[node name="Objective" type="Label" parent="Ingame"]
+margin_left = 43.0203
+margin_top = 68.1428
+margin_right = 130.02
+margin_bottom = 85.1428
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "pvo : 2/10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Endgame" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+
+[node name="Gameower" type="Label" parent="Endgame"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -155.5
+margin_top = -32.5
+margin_right = 155.5
+margin_bottom = 32.5
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "GAMEOWER"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="YouWon" type="Label" parent="Endgame"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -155.5
+margin_top = -32.5
+margin_right = 155.5
+margin_bottom = 32.5
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "YOU WON"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_down" from="MainMenu/StartGame" to="MainMenu" method="_on_StartGame_button_down"]
+[connection signal="color_changed" from="MainMenu/HBoxContainer/camo1" to="MainMenu" method="_on_color_changed" binds= [ 0 ]]
+[connection signal="color_changed" from="MainMenu/HBoxContainer/camo2" to="MainMenu" method="_on_color_changed" binds= [ 1 ]]
+[connection signal="color_changed" from="MainMenu/HBoxContainer/camo3" to="MainMenu" method="_on_color_changed" binds= [ 2 ]]

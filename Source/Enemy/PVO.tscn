@@ -1,0 +1,138 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://PVO.gd" type="Script" id=1]
+[ext_resource path="res://Source/Ammo/Pvo_bullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/HPbar/HPE_value.png" type="Texture" id=3]
+
+[sub_resource type="CubeMesh" id=10]
+
+[sub_resource type="Curve" id=11]
+max_value = 2.0
+_data = [ Vector2( 0.005, 0.579545 ), 0.0, 0.0, 0, 0, Vector2( 0.475, 1.26818 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 2, 2.11414, 2 )
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 4, 2, 4 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.537255, 0.309804, 0.309804, 1 )
+
+[sub_resource type="CubeMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.376471, 0.247059, 0.247059, 1 )
+
+[sub_resource type="CubeMesh" id=5]
+size = Vector3( 1, 1, 6 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.623529, 0.333333, 0.333333, 1 )
+
+[sub_resource type="PrismMesh" id=8]
+
+[sub_resource type="SphereShape" id=7]
+radius = 200.0
+
+[node name="PVO" type="RigidBody"]
+collision_layer = 524288
+collision_mask = 0
+mode = 1
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+script = ExtResource( 1 )
+pvo_bullet = ExtResource( 2 )
+
+[node name="Death_smoke" type="CPUParticles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.33322, 0 )
+emitting = false
+amount = 12
+lifetime = 2.0
+speed_scale = 0.5
+randomness = 0.12
+lifetime_randomness = 0.25
+mesh = SubResource( 10 )
+direction = Vector3( 4, 1, 4 )
+spread = 180.0
+gravity = Vector3( 0, 9.8, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 1.0
+scale_amount = 1.26
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 11 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.08646, 0 )
+shape = SubResource( 9 )
+
+[node name="Base" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Rot" type="MeshInstance" parent="Base"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="Tilt" type="Spatial" parent="Base/Rot"]
+
+[node name="MeshInstance" type="MeshInstance" parent="Base/Rot/Tilt"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -0.501259 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Base/Rot/Tilt"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -0.501259 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="Base/Rot/Tilt"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.969497, -5.79116 )
+visible = false
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="turret1_barrel_end" type="Spatial" parent="Base/Rot/Tilt"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08675, 0.926395, -3.41706 )
+
+[node name="turret2_barrel_end" type="Spatial" parent="Base/Rot/Tilt"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14921, 0.926395, -3.41706 )
+
+[node name="AimDetector" type="RayCast" parent="Base/Rot/Tilt"]
+enabled = true
+cast_to = Vector3( 0, 0, -140 )
+collision_mask = 2
+
+[node name="Radar" type="Area" parent="."]
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="Radar"]
+shape = SubResource( 7 )
+
+[node name="FireRateTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="HpBar3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 10, 0 )
+pixel_size = 0.02
+billboard = 1
+
+[node name="Viewport" type="Viewport" parent="HpBar3D"]
+size = Vector2( 400, 60 )
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="HpBar2D" type="TextureProgress" parent="HpBar3D/Viewport"]
+modulate = Color( 1, 0.360784, 0, 1 )
+margin_right = 40.0
+margin_bottom = 40.0
+value = 100.0
+texture_progress = ExtResource( 3 )
+[connection signal="body_entered" from="Radar" to="." method="_on_Radar_body_entered"]
+[connection signal="body_exited" from="Radar" to="." method="_on_Radar_body_exited"]

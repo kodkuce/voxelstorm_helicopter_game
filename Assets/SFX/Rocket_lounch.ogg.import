@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Rocket_lounch.ogg-7bff109aaa44e5d6fe83a09ec6f1f9d4.oggstr"
+
+[deps]
+
+source_file="res://Assets/SFX/Rocket_lounch.ogg"
+dest_files=[ "res://.import/Rocket_lounch.ogg-7bff109aaa44e5d6fe83a09ec6f1f9d4.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

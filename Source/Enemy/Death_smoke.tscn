@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="CubeMesh" id=10]
+
+[sub_resource type="Curve" id=11]
+max_value = 2.0
+_data = [ Vector2( 0.005, 0.579545 ), 0.0, 0.0, 0, 0, Vector2( 0.475, 1.26818 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Death_smoke" type="CPUParticles"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.25294, 0 )
+emitting = false
+amount = 12
+lifetime = 2.0
+one_shot = true
+speed_scale = 0.5
+randomness = 0.12
+lifetime_randomness = 0.25
+mesh = SubResource( 10 )
+direction = Vector3( 4, 1, 4 )
+spread = 180.0
+gravity = Vector3( 0, 9.8, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 1.0
+scale_amount = 1.26
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 11 )

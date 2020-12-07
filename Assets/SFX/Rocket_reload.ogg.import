@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Rocket_reload.ogg-bc79f601c34ca06574e1e8ddb15ca2eb.oggstr"
+
+[deps]
+
+source_file="res://Assets/SFX/Rocket_reload.ogg"
+dest_files=[ "res://.import/Rocket_reload.ogg-bc79f601c34ca06574e1e8ddb15ca2eb.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
